@@ -1,4 +1,7 @@
 <?php
+/**
+ * 首页入口文件
+ */
 
 if (!file_exists(__DIR__ . '/../app/data/install.lock')) {
 	header("Location: install/install.php");
@@ -39,16 +42,15 @@ $serviceKernel->setConnection($kernel->getContainer()->get('database_connection'
 $currentUser = new CurrentUser();
 $currentUser->fromArray(array(
     'id' => 0,
-    'nickname' => '游客',
+    'nickname' => '娓稿',
     'currentIp' =>  $request->getClientIp(),
     'roles' => array(),
 ));
 $serviceKernel->setCurrentUser($currentUser);
 // END: init service kernel
 
-// NOTICE: 防止请求捕捉失败而做异常处理 
-// 包括：数据库连接失败等
-try {
+// NOTICE: 闃叉璇锋眰鎹曟崏澶辫触鑰屽仛寮傚父澶勭悊 
+// 鍖呮嫭锛氭暟鎹簱杩炴帴澶辫触绛�try {
 	$response = $kernel->handle($request);
 } catch (\RuntimeException $e) {
     echo "Error!  ". $e->getMessage();
